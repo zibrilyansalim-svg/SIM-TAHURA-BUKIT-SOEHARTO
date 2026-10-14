@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIM Tahura Bukit Soeharto</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--bg:#f2f4ee;--sf:#fff;--tx:#1c2a22;--mu:#5f6f64;--ln:#dbe2d6;--ac:#2c6045;--ac2:#e6eee4;--cn:#12372a;--cn2:#1b4a38;--am:#c98a3b;--wr:#b45309;--er:#b4412f;--ok:#2f7d3b;--sb:#12372a;--fh:"Bitter",Georgia,serif;--fb:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1713;--sf:#17231d;--tx:#e4ebe5;--mu:#96a99b;--ln:#2a3b31;--ac:#7fc592;--ac2:#1e3025;--cn:#0b1e16;--cn2:#143127;--am:#e0a352;--wr:#fbbf24;--er:#f2806e;--ok:#4ade80;--sb:#0b1e16}}
+*{box-sizing:border-box}
+body{margin:0;font:15.5px/1.55 var(--fb);background:var(--bg);color:var(--tx);display:grid;grid-template-columns:232px minmax(0,1fr);grid-template-rows:auto 1fr auto;min-height:100vh}
+body:has(nav:empty){grid-template-columns:minmax(0,1fr)}
+header{grid-column:1/-1;position:relative;background:linear-gradient(180deg,var(--cn) 0%,var(--cn2) 100%);color:#eaf3ec;padding:46px 32px 74px;display:flex;gap:16px 28px;align-items:flex-start;flex-wrap:wrap;overflow:hidden}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:64px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 64' preserveAspectRatio='none'%3E%3Cpath d='M0 40 80 26 150 38 230 18 310 34 400 12 490 32 580 20 670 36 760 14 850 30 950 16 1050 34 1130 22 1200 32V64H0Z' fill='%23245c43' fill-opacity='.55'/%3E%3Cpath d='M0 50 70 40 140 50 220 34 300 48 390 30 470 46 560 36 650 50 740 32 830 46 920 34 1010 48 1100 38 1200 46V64H0Z' fill='%23f2f4ee'/%3E%3C/svg%3E") bottom/100% 64px no-repeat}
+@media(prefers-color-scheme:dark){header::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 64' preserveAspectRatio='none'%3E%3Cpath d='M0 40 80 26 150 38 230 18 310 34 400 12 490 32 580 20 670 36 760 14 850 30 950 16 1050 34 1130 22 1200 32V64H0Z' fill='%23245c43' fill-opacity='.4'/%3E%3Cpath d='M0 50 70 40 140 50 220 34 300 48 390 30 470 46 560 36 650 50 740 32 830 46 920 34 1010 48 1100 38 1200 46V64H0Z' fill='%230f1713'/%3E%3C/svg%3E")}}
+header>*{position:relative;z-index:1}
+.ht{flex:1;min-width:280px}
+header h1{margin:0;font:700 28px/1.2 var(--fh);letter-spacing:.2px;color:#fff;max-width:36ch}
+header h1::after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:var(--am);margin-top:10px}
+header p{margin:10px 0 0;color:#b9d2c0;font-size:14.5px;max-width:60ch}
+#ident{font-size:13px;line-height:1.5;color:#b9d2c0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:10px 14px}
+#ident b{color:#fff;font:600 15px var(--fh)}
+#who{position:absolute!important;top:10px;right:32px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:#9fbea8}
+#who:empty{display:none}
+#who .btn.sec{background:rgba(255,255,255,.14);color:#fff}
+nav{background:var(--sb);padding:14px 10px;display:flex;flex-direction:column;gap:2px;position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto}
+nav:empty{display:none}
+nav button{border:0;background:none;color:#a9c4b1;padding:9px 12px;font:500 14.5px var(--fb);cursor:pointer;text-align:left;border-radius:6px;border-left:3px solid transparent;white-space:nowrap}
+nav button:hover{background:rgba(255,255,255,.08);color:#fff}
+nav button.on{background:rgba(255,255,255,.12);color:#fff;font-weight:600;border-left-color:var(--am)}
+nav button:nth-child(3),nav button:nth-child(7),nav button:nth-child(9){margin-top:12px;position:relative}
+nav button:nth-child(3)::before,nav button:nth-child(7)::before,nav button:nth-child(9)::before{content:"";position:absolute;left:10px;right:10px;top:-7px;border-top:1px solid rgba(255,255,255,.14)}
+main{width:100%;max-width:1100px;margin:0 auto;padding:6px 28px 44px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.st{background:var(--sf);border:1px solid var(--ln);border-top:4px solid var(--ac);border-radius:4px 4px 10px 10px;padding:12px 14px 13px}
+main>.stats .st:nth-child(4){border-top-color:var(--er)}
+main>.stats .st:nth-child(4) b{color:var(--er)}
+.st b{display:block;font:700 28px/1.15 var(--fh);color:var(--ac)}
+.st span{color:var(--mu);font-size:13px}
+.box .st{background:var(--bg)}
+.box{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:18px 20px;margin-bottom:18px}
+h2{margin:0 0 12px;font:700 18px var(--fh);color:var(--tx);display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:10px;border-radius:0 80% 0 80%;background:var(--ac);flex:none}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+label{font-size:13px;color:var(--mu);display:block}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--ln);border-radius:6px;background:var(--bg);color:var(--tx);font:inherit;margin-top:4px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--am);outline-offset:1px}
+.btn{padding:9px 16px;border:0;border-radius:6px;background:var(--ac);color:#fff;font:600 14.5px var(--fb);cursor:pointer;transition:background .15s}
+.btn:hover{filter:brightness(1.12)}
+@media(prefers-color-scheme:dark){.btn{color:#0b1e0f}}
+.btn.sec{background:var(--ac2);color:var(--ac)}
+.btn.sm{padding:4px 10px;font-size:13px}
+.btn.del{background:none;color:var(--er);border:1px solid var(--er)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--ln);vertical-align:top}
+th{color:var(--ac);font:700 13.5px var(--fb);background:var(--ac2);border-bottom:2px solid var(--ac)}
+tr:hover td{background:color-mix(in srgb,var(--ac2) 40%,transparent)}
+.tag{display:inline-block;padding:1px 10px;border-radius:99px;font-size:12.5px;font-weight:600;background:var(--ac2);color:var(--ac)}
+.tag.r{color:var(--er);background:color-mix(in srgb,var(--er) 13%,transparent)}
+.tag.y{color:var(--wr);background:color-mix(in srgb,var(--wr) 13%,transparent)}
+.tag.g{color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,transparent)}
+.empty,.note{color:var(--mu);font-size:13.5px}
+.h3{margin:16px 0 4px;font:700 15px var(--fh);color:var(--ac)}
+ul{margin:0;padding-left:20px}
+.bar{margin-bottom:10px}
+#map{height:500px;border-radius:8px;border:1px solid var(--ln);z-index:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.pin{width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 3px #000}
+.leaflet-popup-content{color:#1d2b1f;font-size:13px}
+.leaflet-popup-content label{color:#445}
+.leaflet-popup-content input,.leaflet-popup-content select{background:#fff;color:#1d2b1f}
+footer{grid-column:1/-1;background:var(--cn);color:#a9c4b1;padding:14px 32px;font-size:13px;border-top:3px solid var(--am)}
+footer b{color:#fff;font-weight:600}
+@media(max-width:860px){
+body{grid-template-columns:minmax(0,1fr)}
+nav{position:static;flex-direction:row;overflow-x:auto;padding:8px;max-height:none}
+nav button{border-left:0;border-bottom:3px solid transparent;border-radius:6px 6px 0 0}
+nav button.on{border-bottom-color:var(--am)}
+nav button:nth-child(n){margin-top:0}
+nav button:nth-child(n)::before{display:none}
+main{padding:4px 12px 30px}
+header{padding:46px 16px 70px}
+header h1{font-size:22px}
+#who{right:16px}
+}
+@media print{:root{--bg:#fff;--sf:#fff;--tx:#000;--mu:#444;--ln:#999;--ac:#2c6045;--ac2:#eee}body{display:block}header,nav,.noprint,button,#who{display:none!important}.box{break-inside:avoid}footer{background:none;color:#000;border-top:1px solid #999;padding:10px 0}footer b{color:#000}}
+</style>
+</head>
+<body>
+<header>
+<div class="ht"><h1>SIM Manajemen Kawasan Konservasi: Tahura Bukit Soeharto</h1><p>Ruang (blok/area), isi ruang, penanggung jawab, faktor eksternal, dan peta dalam satu sistem</p></div>
+<div id="ident"></div>
+<div id="who"></div>
+</header>
+<nav id="nav"></nav>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const IDENT={nama:"Zibrilyan As-Syfa Salim",nim:"2410611310064",instansi:"Fakultas Kehutanan, Universitas Lambung Mangkurat"};
+function fillIdent(){
+ const I=IDENT;
+ document.getElementById("ident").innerHTML=`<b>${E(I.nama)}</b><br>NIM ${E(I.nim)}<br>${E(I.instansi)}`;
+ document.getElementById("foot").innerHTML=`Disusun oleh <b>${E(I.nama)}</b> (NIM ${E(I.nim)}), ${E(I.instansi)}`}
+const KEY="sim_tahura_v2";
+const seed={
+ pics:[
+  {id:1,nama:"Erni Kusumawati",jabatan:"Kepala UPTD Tahura Bukit Soeharto",instansi:"Dinas Kehutanan Kaltim",kontak:"",sumber:"Tribun Kaltim (awal 2026), perlu verifikasi"},
+  {id:2,nama:"Thomas Umbu Pati Tena Bolodadi",jabatan:"Deputi Bidang Pengendalian Pembangunan",instansi:"Otorita IKN",kontak:"",sumber:"Bisnis.com, 25 Sep 2026"},
+  {id:3,nama:"Myrna Safitri",jabatan:"Deputi Bidang Lingkungan Hidup dan SDA",instansi:"Otorita IKN",kontak:"",sumber:"RRI, 28 Apr 2026"},
+  {id:4,nama:"Rusmadi",jabatan:"Plt Kepala Dinas Kehutanan Provinsi",instansi:"Dinas Kehutanan Kaltim",kontak:"",sumber:"Antara Kaltim, 2 Sep 2026"}],
+ rooms:[
+  {id:1,nama:"Seluruh kawasan Tahura",jenis:"Seluruh kawasan",luas:64814.98,pj:2,sumber:"SK Menteri LHK No. SK.1231/2017"},
+  {id:2,nama:"Hutan Penelitian Unmul (KHDTK)",jenis:"Area/KHDTK",luas:22183,pj:3,sumber:"Kompas 2019 (basis total 61.850 ha, bukan blok resmi)"},
+  {id:3,nama:"Wanariset Samboja (KHDTK)",jenis:"Area/KHDTK",luas:3504,pj:1,sumber:"Kompas 2019 (bukan blok resmi)"},
+  {id:4,nama:"Hutan Pendidikan Unmul",jenis:"Area/KHDTK",luas:1500,pj:3,sumber:"Kompas 2019 (bukan blok resmi)"},
+  {id:5,nama:"Blok Tahura menurut SK 415/KSDAE/2019",jenis:"Blok",luas:null,pj:1,sumber:"Luas per blok belum tersedia di web; isi dari dokumen SK"}],
+ items:[
+  {id:1,room:1,jenis:"Fauna",nama:"Macan dahan, buaya muara, rangkong badak, owa kalawat",ket:"Satwa kunci",sumber:"Antara (OIKN)"},
+  {id:2,room:1,jenis:"Fauna",nama:"Keanekaragaman satwa",ket:"90 jenis, 9 terancam punah (IUCN)",sumber:"BKSDA Kaltim via CNN Indonesia, 2022"},
+  {id:3,room:1,jenis:"Flora/Ekosistem",nama:"Hutan Dipterocarpaceae dataran rendah, hutan kerangas, hutan pantai, semak belukar",ket:"Tipe ekosistem",sumber:"Dokumen Blok Pengelolaan 2019"},
+  {id:4,room:3,jenis:"Fauna",nama:"Pusat Reintroduksi dan Rehabilitasi Orangutan",ket:"Fasilitas",sumber:"Kompas 2019"},
+  {id:5,room:1,jenis:"Sarana",nama:"Waduk Samboja",ket:"Hampir seluruhnya di dalam kawasan",sumber:"Indcyber"},
+  {id:6,room:1,jenis:"Sarana",nama:"Lahan rehabilitasi",ket:"Berkurang sekitar 5 ha",sumber:"Tribun Kaltim"}],
+ factors:[
+  {id:1,room:1,jenis:"Kebakaran",deskripsi:"Karhutla: lebih dari 200 ha (2 Sep), sekitar 420 ha (24 Sep 2026)",dampak:"Tinggi",sumber:"Antara; Fokus Borneo"},
+  {id:2,room:1,jenis:"Pendudukan lahan",deskripsi:"23.556 ha (36%) dikuasai masyarakat/badan hukum; 2-5 ha per orang",dampak:"Tinggi",sumber:"OIKN, 25 Sep 2026"},
+  {id:3,room:1,jenis:"Pertambangan ilegal",deskripsi:"Tambang batu bara ilegal dan stockpile di area Bukit Tengkorak",dampak:"Tinggi",sumber:"Siaran pers OIKN, 4 Okt 2025"},
+  {id:4,room:1,jenis:"Infrastruktur",deskripsi:"Jalan poros Samarinda-Balikpapan dan tol memotong kawasan",dampak:"Sedang",sumber:"Antara; Kompas"},
+  {id:5,room:1,jenis:"Sumber air",deskripsi:"Balikpapan dan Samboja bergantung pada air dari kawasan",dampak:"Sedang",sumber:"Mongabay 2019"},
+  {id:6,room:1,jenis:"Pembangunan IKN",deskripsi:"Kawasan berada di wilayah IKN; kewenangan beralih ke Otorita IKN",dampak:"Sedang",sumber:"Antara Kaltim, 2 Sep 2026"}],
+ marks:[
+  {id:1,nama:"Patok batas desa TK...013 (dalam Tahura)",lat:-0.79005,lng:116.89887,room:1,ok:1,ket:"Sumber: Perbup Kukar No. 34/2024"},
+  {id:2,nama:"Patok batas desa TK...017 (dalam Tahura)",lat:-0.81778,lng:116.86944,room:1,ok:1,ket:"Sumber: Perbup Kukar No. 34/2024"},
+  {id:3,nama:"Simpul batas Sungai Payang-Bakungan (dalam Tahura)",lat:-0.83414,lng:116.8588,room:1,ok:1,ket:"Sumber: Perbup Kukar No. 34/2024"},
+  {id:4,nama:"Pusat kawasan (perkiraan)",lat:-0.9,lng:116.97,room:1,ok:0,ket:"Perkiraan kasar"},
+  {id:5,nama:"Wanariset Samboja (perkiraan)",lat:-1.0,lng:116.97,room:3,ok:0,ket:"Perkiraan kasar"},
+  {id:6,nama:"Bukit Tengkorak (perkiraan)",lat:-0.97,lng:116.8,room:1,ok:0,ket:"Perkiraan kasar"},
+  {id:7,nama:"Waduk Samboja (perkiraan)",lat:-1.03,lng:116.95,room:1,ok:0,ket:"Perkiraan kasar"}],
+ geo:null,log:[],
+ cfg:{bobot:{Rendah:1,Sedang:3,Tinggi:5},r:6,s:14,asumsi:"Asumsi penulis: bobot dampak 1-3-5 dan batas kategori skor 6 dan 14 adalah pendekatan sederhana, belum dikalibrasi dengan data lapangan atau standar manajemen risiko tertentu. Silakan sesuaikan.",tgl:"",oleh:""},
+ notes:[
+  {id:1,lat:-0.92,lng:116.99,tgl:"2026-09-02",jenis:"Kebakaran",dampak:"Tinggi",prob:4,room:1,ket:"Karhutla area KM 50, lebih dari 200 ha terbakar. Sumber: Antara Kaltim, 2 Sep 2026",oleh:"data awal",perk:1},
+  {id:2,lat:-0.968,lng:116.805,tgl:"2026-09-08",jenis:"Kebakaran",dampak:"Tinggi",prob:4,room:1,ket:"Kebakaran di Bukit Tengkorak hampir seminggu, ditangani water bombing. Sumber: Kompas, 8 Sep 2026",oleh:"data awal",perk:1},
+  {id:3,lat:-0.975,lng:116.795,tgl:"2025-09-17",jenis:"Pertambangan ilegal",dampak:"Tinggi",prob:4,room:1,ket:"Stockpile batu bara dan pasir hasil tambang ilegal di Bukit Tengkorak. Sumber: siaran pers Otorita IKN, 4 Okt 2025",oleh:"data awal",perk:1},
+  {id:4,lat:-0.83,lng:116.865,tgl:"2026-09-24",jenis:"Pendudukan lahan",dampak:"Tinggi",prob:5,room:1,ket:"Penertiban bangunan liar dan pembukaan lahan di sekitar Desa Bakungan dan Loa Duri, Loa Janan. Sumber: Bisnis.com, 25 Sep 2026",oleh:"data awal",perk:1},
+  {id:5,lat:-0.93,lng:117.0,tgl:"2026-04-28",jenis:"Pendudukan lahan",dampak:"Sedang",prob:3,room:1,ket:"Area terbuka KM 65 terdampak aktivitas ilegal; penanaman 100 bibit rehabilitasi. Sumber: RRI, 28 Apr 2026",oleh:"data awal",perk:1}],
+ plans:[
+  {id:1,factor:1,nama:"Pencegahan dan pemadaman karhutla (contoh)",pj:1,target:"2026-12-31",hambatan:"",ms:[{n:"Patroli rutin dan pos jaga siaga",done:true,tgl:"",bukti:""},{n:"Pemadaman titik api prioritas",done:false,tgl:"",bukti:""},{n:"Evaluasi luas lahan terbakar",done:false,tgl:"",bukti:""},{n:"Rehabilitasi lahan terbakar",done:false,tgl:"",bukti:""}]},
+  {id:2,factor:2,nama:"Penertiban dan pemulihan lahan terdampak (contoh)",pj:2,target:"2027-03-31",hambatan:"",ms:[{n:"Pemetaan dan verifikasi lahan yang dikuasai",done:false,tgl:"",bukti:""},{n:"Sosialisasi dan dialog dengan penghuni",done:false,tgl:"",bukti:""},{n:"Penertiban bertahap",done:false,tgl:"",bukti:""},{n:"Penanaman dan pemeliharaan rehabilitasi",done:false,tgl:"",bukti:""}]},
+  {id:3,factor:3,nama:"Penindakan dan penutupan tambang ilegal (contoh)",pj:2,target:"2027-01-31",hambatan:"",ms:[{n:"Inventarisasi lokasi tambang ilegal",done:false,tgl:"",bukti:""},{n:"Operasi gabungan dan penutupan lokasi",done:false,tgl:"",bukti:""},{n:"Pemulihan lahan bekas tambang",done:false,tgl:"",bukti:""},{n:"Pemantauan berkala pasca-penutupan",done:false,tgl:"",bukti:""}]},
+  {id:4,factor:4,nama:"Mitigasi dampak jalan poros dan tol terhadap satwa (contoh)",pj:1,target:"2027-06-30",hambatan:"",ms:[{n:"Identifikasi titik perlintasan satwa",done:false,tgl:"",bukti:""},{n:"Pemasangan rambu dan pembatas",done:false,tgl:"",bukti:""},{n:"Pembangunan koridor atau penyeberangan satwa",done:false,tgl:"",bukti:""},{n:"Monitoring kejadian tabrakan satwa",done:false,tgl:"",bukti:""}]},
+  {id:5,factor:5,nama:"Perlindungan sumber air dan Waduk Samboja (contoh)",pj:4,target:"2027-03-31",hambatan:"",ms:[{n:"Pemetaan daerah tangkapan air",done:false,tgl:"",bukti:""},{n:"Kesepakatan perlindungan dengan pengguna air",done:false,tgl:"",bukti:""},{n:"Rehabilitasi vegetasi sempadan",done:false,tgl:"",bukti:""},{n:"Pemantauan debit dan kualitas air",done:false,tgl:"",bukti:""}]},
+  {id:6,factor:6,nama:"Sinkronisasi pengelolaan Tahura dengan Otorita IKN (contoh)",pj:3,target:"2027-02-28",hambatan:"",ms:[{n:"Pemetaan kewenangan antar-lembaga",done:false,tgl:"",bukti:""},{n:"Penyusunan kesepakatan pembagian peran",done:false,tgl:"",bukti:""},{n:"Rencana pengelolaan terpadu",done:false,tgl:"",bukti:""},{n:"Evaluasi pelaksanaan",done:false,tgl:"",bukti:""}]}]
+};
+seed.factors.forEach((f,i)=>{f.prob=[4,5,4,3,2,3][i];f.status=["Ditangani","Ditangani","Ditangani","Dilaporkan","Dilaporkan","Dilaporkan"][i]});
+let db;
+try{db=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!db)db=JSON.parse(JSON.stringify(seed));
+db.factors.forEach(f=>{f.prob??=3;f.status??="Dilaporkan"});
+db.log??=[];db.notes??=[];db.plans??=[];db.cfg??=JSON.parse(JSON.stringify(seed.cfg));
+if(!db.seed7){seed.notes.forEach(n=>{if(!db.notes.some(x=>x.id==n.id)&&db.rooms.some(r=>r.id==n.room))db.notes.push(JSON.parse(JSON.stringify(n)))});seed.plans.forEach(q=>{if(!db.plans.some(x=>x.id==q.id)&&db.factors.some(f=>f.id==q.factor))db.plans.push(JSON.parse(JSON.stringify(q)))});db.seed7=1}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){}};
+const E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nm=(l,id)=>(db[l].find(x=>x.id==id)||{}).nama||"-";
+const opt=l=>()=>db[l].map(x=>({v:x.id,l:x.nama}));
+const fix=a=>()=>a.map(x=>({v:x,l:x}));
+const tc=v=>({"Tinggi":"r","Sedang":"y","Rendah":"g"}[v]||"");
+const tag=v=>`<span class="tag ${tc(v)}">${E(v)}</span>`;
+const ha=v=>v?Number(v).toLocaleString("id-ID")+" ha":'<span class="note">belum diisi</span>';
+const KP=["Resmi","Berita","Asumsi","Perlu verifikasi"];
+const kpg=s=>{s=String(s||"").toLowerCase();if(!s.trim()||/verifikasi|bukan blok resmi|belum tersedia/.test(s))return"Perlu verifikasi";if(/contoh|asumsi/.test(s))return"Asumsi";if(/\bsk\b|perbup|permen|pergub|dokumen/.test(s))return"Resmi";if(/antara|kompas|bisnis|\brri\b|tribun|mongabay|cnn|indcyber|fokus borneo|oikn|siaran pers|berita/.test(s))return"Berita";return"Perlu verifikasi"};
+const kp=x=>KP.includes(x.kep)?x.kep:kpg(x.sumber);
+const kpc={"Resmi":"g","Berita":"","Asumsi":"y","Perlu verifikasi":"r"};
+const kpTag=x=>`<span class="tag ${kpc[kp(x)]}" title="${x.kep?"Ditetapkan pengguna":"Ditentukan otomatis dari kolom sumber; ubah lewat tombol Ubah untuk menetapkan"}">${kp(x)}</span>`;
+const KPF={k:"kep",l:"Kepercayaan data",o:fix(KP),show:(v,x)=>kpTag(x)};
+const CFG={
+ rooms:{title:"Ruang",f:[{k:"nama",l:"Nama blok/area"},{k:"jenis",l:"Jenis",o:fix(["Seluruh kawasan","Blok","Area/KHDTK"])},{k:"luas",l:"Luas (ha)",t:"number",r:1,show:ha},{k:"pj",l:"Penanggung jawab",n:1,o:opt("pics"),show:v=>E(nm("pics",v))},{k:"sumber",l:"Sumber data",r:1},KPF]},
+ items:{title:"Isi Ruang",f:[{k:"room",l:"Ruang",n:1,o:opt("rooms"),show:v=>E(nm("rooms",v))},{k:"jenis",l:"Jenis",o:fix(["Fauna","Flora/Ekosistem","Sarana"])},{k:"nama",l:"Nama"},{k:"ket",l:"Keterangan/jumlah",r:1},{k:"sumber",l:"Sumber",r:1},KPF]},
+ pics:{title:"Penanggung Jawab",f:[{k:"nama",l:"Nama"},{k:"jabatan",l:"Jabatan"},{k:"instansi",l:"Instansi"},{k:"kontak",l:"Kontak",r:1},{k:"sumber",l:"Sumber",r:1},KPF]},
+ factors:{title:"Faktor Eksternal",f:[{k:"room",l:"Ruang terdampak",n:1,o:opt("rooms"),show:v=>E(nm("rooms",v))},{k:"jenis",l:"Jenis faktor",o:fix(["Kebakaran","Pendudukan lahan","Pertambangan ilegal","Infrastruktur","Pembangunan IKN","Sumber air","Lainnya"])},{k:"deskripsi",l:"Deskripsi"},{k:"dampak",l:"Dampak",o:fix(["Rendah","Sedang","Tinggi"]),show:tag},{k:"prob",l:"Kemungkinan (1-5)",n:1,o:fix([1,2,3,4,5])},{k:"skor",l:"Skor risiko",calc:f=>skor(f)+" "+tag(kat(skor(f)))},{k:"status",l:"Tindak lanjut",o:fix(["Dilaporkan","Ditangani","Selesai"]),show:v=>`<span class="tag ${{"Selesai":"g","Ditangani":"y","Dilaporkan":"r"}[v]||""}">${E(v)}</span>`},{k:"sumber",l:"Sumber",r:1},KPF]}
+};
+const TABS=[["dash","Dashboard"],["map","Peta"],["rooms","Ruang"],["items","Isi Ruang"],["pics","Penanggung Jawab"],["factors","Faktor Eksternal"],["plan","Rencana Aksi"],["cfg","Pengaturan Risiko"],["rep","Laporan"],["doc","Dokumentasi"],["log","Log Aktivitas"]];
+const USERS={admin:{p:"admin123",role:"Admin"},petugas:{p:"petugas123",role:"Petugas"},pimpinan:{p:"pimpinan123",role:"Pimpinan"}};
+let user=null;try{user=JSON.parse(sessionStorage.getItem("sim_user"))}catch(e){}
+const can=a=>({Admin:["add","edit","del","reset","geo"],Petugas:["add","edit","geo"],Pimpinan:[]}[user&&user.role]||[]).includes(a);
+function logA(a,d){db.log.unshift({t:new Date().toLocaleString("id-ID"),u:user?user.name:"-",a,d});db.log=db.log.slice(0,200);save()}
+let tab="dash",editing=null,q="",map=null,fv="",pg=1,sk=null,sd=1,rp="all";
+
+function nav(){document.getElementById("nav").innerHTML=!user?"":TABS.filter(t=>t[0]!="log"||user.role!="Petugas").map(([k,l])=>`<button class="${k==tab?"on":""}" onclick="go('${k}')">${l}</button>`).join("")}
+function go(t){tab=t;pedit=null;editing=null;q="";fv="";pg=1;sk=null;render()}
+
+function dash(){
+ const hi=db.factors.filter(f=>f.dampak=="Tinggi").length;
+ const rows=db.rooms.map(r=>{
+  const its=db.items.filter(i=>i.room==r.id),fs=db.factors.filter(f=>f.room==r.id);
+  return `<tr><td><b>${E(r.nama)}</b><br><small>${E(r.jenis)} · ${ha(r.luas)}</small></td><td>${E(nm("pics",r.pj))}</td><td>${its.length?its.map(i=>E(i.nama)).join("; "):"-"}</td><td>${fs.length?fs.map(f=>E(f.jenis)+" "+tag(f.dampak)).join("<br>"):"-"}</td></tr>`}).join("");
+ return `<div class="stats"><div class="st"><b>${db.rooms.length}</b><span>Ruang terdaftar</span></div><div class="st"><b>${db.items.length}</b><span>Catatan isi ruang</span></div><div class="st"><b>${db.pics.length}</b><span>Penanggung jawab</span></div><div class="st"><b>${hi}</b><span>Faktor dampak tinggi</span></div><div class="st"><b>${db.notes.length}</b><span>Catatan lapangan</span></div><div class="st"><b>${db.plans.filter(p=>pprog(p)==100).length}/${db.plans.length}</b><span>Rencana aksi selesai</span></div></div>
+ <div class="box"><h2>Ringkasan per ruang</h2><div class="tw"><table><tr><th>Ruang</th><th>Penanggung jawab</th><th>Isi ruang</th><th>Faktor eksternal</th></tr>${rows}</table></div></div>
+ ${analysis()}${qualityBox()}${trendBox()}${backupBox()}<div class="box"><h2>Catatan data</h2><p class="note">Luas kawasan mengikuti SK.1231/2017 (64.814,98 ha). Pengelolaan kini dilaporkan beralih ke Otorita IKN, dengan UPTD dan Dinas Kehutanan Kaltim membantu. Luas per blok resmi (SK 415/KSDAE/SET/KSA.0/10/2019) belum tersedia di web, jadi isi manual dari dokumen SK. Sebagian besar angka bersumber berita (data hingga Okt 2026) dan perlu diverifikasi ke UPTD Tahura atau Dinas Kehutanan Kaltim. Jabatan dapat berubah.</p></div>`}
+
+const DS={"Rendah":1,"Sedang":3,"Tinggi":5},TH={r:6,s:14};
+const skor=f=>(f.prob||3)*(DS[f.dampak]||1);
+const kat=s=>s>TH.s?"Tinggi":s>TH.r?"Sedang":"Rendah";
+function bars(d,mx,sf){const m=mx||Math.max(1,...d.map(x=>x[1]));return d.map(([l,n,c])=>`<div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:130px;font-size:13px">${E(l)}</span><div style="flex:1;background:var(--ac2);border-radius:4px"><div style="width:${n/m*100}%;min-width:${n?4:0}px;background:${c||"var(--ac)"};height:16px;border-radius:4px"></div></div><b style="width:${sf?40:24}px;text-align:right">${n}${sf||""}</b></div>`).join("")}
+function filled(x,f){const v=x[f.k];if(f.k=="pj")return db.pics.some(p=>p.id==v);if(f.k=="room")return db.rooms.some(r=>r.id==v);return v!==null&&v!==undefined&&String(v).trim()!==""}
+function qualityBox(){
+ const ks=["rooms","items","pics","factors"],kc={"Resmi":"var(--ok)","Berita":"var(--ac)","Asumsi":"var(--wr)","Perlu verifikasi":"var(--er)"};
+ let T=0,D=0;const kosong=[];
+ const per=ks.map(k=>{let t=0,d=0;CFG[k].f.filter(f=>!f.calc&&f.k!="kep").forEach(f=>{let e=0;db[k].forEach(x=>{t++;if(filled(x,f))d++;else e++});if(e)kosong.push(CFG[k].title+": "+f.l+" ("+e+" dari "+db[k].length+" kosong)")});T+=t;D+=d;return [CFG[k].title,t?Math.round(d/t*100):100]});
+ const all=ks.flatMap(k=>db[k].map(kp)),kd=KP.map(c=>[c,all.filter(x=>x==c).length,kc[c]]);
+ const pct=T?Math.round(D/T*100):100,rs=all.length?Math.round(all.filter(x=>x=="Resmi").length/all.length*100):0;
+ return `<div class="box"><h2>Kelengkapan dan kepercayaan data</h2><div class="stats"><div class="st"><b>${pct}%</b><span>Kelengkapan isian data</span></div><div class="st"><b>${rs}%</b><span>Entri bersumber resmi</span></div><div class="st"><b>${kd[3][1]}</b><span>Entri perlu verifikasi</span></div></div>
+ <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"><div><div class="h3">Kelengkapan per tabel</div>${bars(per,100,"%")}<div class="h3">Isian yang masih kosong</div>${kosong.length?"<ul>"+kosong.map(e=>`<li>${E(e)}</li>`).join("")+"</ul>":'<p class="note">Semua isian terisi.</p>'}</div>
+ <div><div class="h3">Tingkat kepercayaan (${all.length} entri)</div>${bars(kd)}<p class="note">Resmi = peraturan atau dokumen resmi; Berita = pemberitaan atau siaran pers; Asumsi = penilaian penulis; Perlu verifikasi = belum bisa dipastikan. Kelengkapan = isian terisi dibagi seluruh isian pada empat tabel utama (kolom kepercayaan tidak dihitung). Entri lama ditentukan otomatis dari kolom sumber, jadi periksa dan tetapkan lewat tombol Ubah.</p></div></div></div>`}
+function alerts(){
+ const a=[];
+ db.rooms.forEach(r=>{
+  if(!db.pics.some(p=>p.id==r.pj))a.push(`Ruang "${r.nama}" belum punya penanggung jawab`);
+  if(!r.luas)a.push(`Luas ruang "${r.nama}" belum diisi`);
+  if(!db.items.some(i=>i.room==r.id))a.push(`Ruang "${r.nama}" belum punya catatan isi ruang`)});
+ db.factors.filter(f=>kat(skor(f))=="Tinggi"&&f.status!="Selesai").forEach(f=>a.push(`Risiko tinggi belum selesai: ${f.jenis} (skor ${skor(f)}, ${f.status})`));
+ db.factors.filter(f=>kat(skor(f))=="Tinggi"&&!db.plans.some(p=>p.factor==f.id)).forEach(f=>a.push(`Risiko tinggi belum punya rencana aksi: ${f.jenis}`));
+ db.plans.filter(p=>pstat(p)=="Terlambat").forEach(p=>a.push(`Rencana aksi terlambat: ${p.nama} (target ${p.target})`));
+ const u=db.marks.filter(m=>!m.ok).length;if(u)a.push(`${u} titik peta masih berupa perkiraan`);
+ return a}
+function analysis(){
+ const col={Tinggi:"var(--er)",Sedang:"var(--wr)",Rendah:"var(--ok)"};
+ const kc=["Tinggi","Sedang","Rendah"].map(k=>[k,db.factors.filter(f=>kat(skor(f))==k).length,col[k]]);
+ const st=["Dilaporkan","Ditangani","Selesai"].map(s=>[s,db.factors.filter(f=>f.status==s).length]);
+ const ij=["Fauna","Flora/Ekosistem","Sarana"].map(s=>[s,db.items.filter(i=>i.jenis==s).length]);
+ let m='<table style="text-align:center"><tr><th>Kemungkinan</th><th>Dampak rendah</th><th>Dampak sedang</th><th>Dampak tinggi</th></tr>';
+ for(let p=5;p>=1;p--){m+=`<tr><th>${p}</th>`;["Rendah","Sedang","Tinggi"].forEach(d=>{const n=db.factors.filter(f=>f.prob==p&&f.dampak==d).length;m+=`<td style="background:color-mix(in srgb,${col[kat(p*DS[d])]} 28%,transparent)"><b>${n||""}</b></td>`});m+="</tr>"}
+ m+="</table>";
+ const al=alerts();
+ return `<div class="box"><h2>Peringatan otomatis (${al.length})</h2>${al.length?"<ul>"+al.map(a=>`<li>${E(a)}</li>`).join("")+"</ul>":'<p class="note">Tidak ada peringatan.</p>'}</div>
+ <div class="box"><h2>Analisis faktor eksternal</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"><div><div class="h3">Kategori risiko</div>${bars(kc)}<div class="h3">Status tindak lanjut</div>${bars(st)}<div class="h3">Isi ruang per jenis</div>${bars(ij)}</div><div><div class="h3">Matriks risiko (kemungkinan x dampak)</div>${m}<p class="note">Skor = kemungkinan (1-5) x bobot dampak (rendah ${DS.Rendah}, sedang ${DS.Sedang}, tinggi ${DS.Tinggi}). Skor 1-${TH.r} rendah, ${TH.r+1}-${TH.s} sedang, di atas ${TH.s} tinggi (bisa diatur di tab Pengaturan Risiko). Nilai kemungkinan pada data awal adalah penilaian contoh, ubah sesuai analisismu.</p></div></div></div>`}
+function info(rid){
+ const r=db.rooms.find(x=>x.id==rid);if(!r)return"";
+ const its=db.items.filter(i=>i.room==rid),fs=db.factors.filter(f=>f.room==rid);
+ return `<b>${E(r.nama)}</b><br>Penanggung jawab: ${E(nm("pics",r.pj))}<br>Isi: ${its.length?its.map(i=>E(i.nama)).join("; "):"-"}<br>Faktor: ${fs.length?fs.map(f=>E(f.jenis)+" ("+E(f.dampak)+")").join(", "):"-"}`}
+
+function mapView(){
+ return `<div class="box"><h2>Peta lokasi</h2>${can("add")?'<div class="row noprint"><button class="btn sm" id="nbtn" onclick="togMode()">Mode tambah catatan: mati</button><span class="note">Aktifkan, lalu klik titik di peta untuk mencatat kejadian.</span></div>':""}<div id="map"></div>
+ <p class="note">Titik hijau bersumber dari peraturan (patok batas desa dalam Tahura). Titik oranye adalah perkiraan kasar: seret ke lokasi sebenarnya, posisi tersimpan otomatis. Batas blok resmi dapat diimpor di bawah. Kotak berwarna adalah catatan lapangan (hijau, kuning, merah = risiko rendah, sedang, tinggi); Admin dan Petugas dapat menggesernya.</p></div>
+ ${noteBox()}<div class="box"><h2>Impor batas blok (GeoJSON)</h2>
+ <p class="note">Gunakan properti <b>nama</b> pada tiap fitur yang sama dengan nama ruang agar popup menampilkan penanggung jawab, isi ruang, dan faktor eksternalnya.</p>
+ <div class="row"><input type="file" id="gf" accept=".geojson,.json" style="max-width:320px"></div>
+ <textarea id="gt" rows="4" placeholder="Atau tempel isi GeoJSON di sini"></textarea>
+ <div class="row"><button class="btn" onclick="impGeo()">Tampilkan di peta</button><button class="btn sec" onclick="clrGeo()">Hapus batas impor</button><button class="btn sec" onclick="expMarks()">Ekspor titik (GeoJSON)</button></div></div>`}
+
+function initMap(){
+ if(map){map.remove();map=null}
+ if(typeof L=="undefined"){document.getElementById("map").innerHTML='<p class="empty" style="padding:14px">Peta tidak termuat. Periksa koneksi internet lalu muat ulang.</p>';return}
+ map=L.map("map").setView([-0.9,116.93],10);
+ const osm=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Tiles &copy; Esri"}).addTo(map);
+ const sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Tiles &copy; Esri"});
+ const mk=L.layerGroup().addTo(map),nl=L.layerGroup().addTo(map),over={"Titik lokasi":mk,"Catatan lapangan":nl},top=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:18,attribution:"Tiles &copy; Esri"}),base={"Peta jalan":osm,"Topografi":top,"Satelit":sat};
+ db.marks.forEach(m=>{
+  const c=m.ok?"#15803d":"#ea580c";
+  const x=L.marker([m.lat,m.lng],{draggable:!m.ok&&can("edit"),icon:L.divIcon({className:"",html:`<div class="pin" style="background:${c}"></div>`,iconSize:[16,16],iconAnchor:[8,8]})}).addTo(mk);
+  x.bindPopup(`<b>${E(m.nama)}</b><br><i>${E(m.ket)}</i><br>${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}<hr>${info(m.room)}`);
+  x.on("dragend",e=>{const p=e.target.getLatLng();m.lat=p.lat;m.lng=p.lng;logA("Ubah","Titik peta digeser: "+m.nama);x.setPopupContent(`<b>${E(m.nama)}</b><br><i>${E(m.ket)} (posisi digeser)</i><br>${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}<hr>${info(m.room)}`)})});
+ addMode=false;nlayer=nl;drawNotes();
+ map.on("click",ev=>{if(!addMode||!can("add"))return;L.popup().setLatLng(ev.latlng).setContent(noteForm(ev.latlng)).openOn(map)});
+ if(db.geo){
+  try{const g=L.geoJSON(JSON.parse(db.geo),{style:()=>({color:"#2f6b3a",weight:2,fillOpacity:.3}),onEachFeature:(f,l)=>{
+   const p=f.properties||{},n=p.nama||p.NAMA||p.name||p.BLOK||"";
+   const r=db.rooms.find(x=>x.nama.toLowerCase()==String(n).toLowerCase());
+   l.bindPopup(r?info(r.id):`<b>${E(n||"Tanpa nama")}</b><br>Belum cocok dengan data Ruang. Samakan properti nama dengan nama ruang.`)}}).addTo(map);
+   over["Batas blok (impor)"]=g;map.fitBounds(g.getBounds())}catch(e){}}
+ L.control.layers(base,over).addTo(map)}
+
+function impGeo(){if(!can("geo")){alert("Peran Anda tidak boleh mengimpor batas.");return}
+ const t=document.getElementById("gt").value.trim(),f=document.getElementById("gf").files[0];
+ const set=s=>{try{JSON.parse(s);db.geo=s;logA("Impor","GeoJSON batas blok diimpor");render()}catch(e){alert("GeoJSON tidak valid. Periksa format file.")}};
+ if(f){const r=new FileReader();r.onload=()=>set(r.result);r.readAsText(f)}else if(t)set(t);else alert("Pilih file atau tempel GeoJSON dulu.")}
+function clrGeo(){if(!can("geo")){alert("Peran Anda tidak boleh menghapus batas.");return}db.geo=null;logA("Hapus","Batas blok impor dihapus");render()}
+function expMarks(){
+ const g={type:"FeatureCollection",features:db.marks.map(m=>({type:"Feature",properties:{nama:m.nama,keterangan:m.ket},geometry:{type:"Point",coordinates:[m.lng,m.lat]}}))};
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(g,null,1)],{type:"application/json"}));a.download="titik-tahura.geojson";a.click()}
+
+function crud(k){
+ const c=CFG[k],cur=editing?db[k].find(x=>x.id==editing):{};
+ const form=c.f.filter(f=>!f.calc).map(f=>{
+  const v=cur[f.k]??(f.k=="kep"?(cur.id?kp(cur):"Perlu verifikasi"):"");
+  if(f.o){const os=f.o();return `<label>${f.l}<select name="${f.k}" required>${os.length?"":'<option value="">(isi data terkait dulu)</option>'}${os.map(o=>`<option value="${E(o.v)}" ${o.v==v?"selected":""}>${E(o.l)}</option>`).join("")}</select></label>`}
+  return `<label>${f.l}<input name="${f.k}" type="${f.t||"text"}" ${f.t?'min="0" step="any"':""} value="${E(v)}" ${f.r?"":"required"}></label>`}).join("");
+ const ql=q.toLowerCase(),list=db[k].filter(x=>JSON.stringify(x).toLowerCase().includes(ql)||c.f.some(f=>["pj","room"].includes(f.k)&&nm(f.k=="pj"?"pics":"rooms",x[f.k]).toLowerCase().includes(ql))).filter(x=>!fv||String(x[c.flt])==fv);
+ const sorted=sortList(list),pages=Math.max(1,Math.ceil(sorted.length/PS));if(pg>pages)pg=pages;
+ const fopts=[...new Set(db[k].map(x=>x[c.flt]))].map(v=>`<option value="${E(v)}" ${v==fv?"selected":""}>${E(v)}</option>`).join("");
+ const rows=sorted.slice((pg-1)*PS,pg*PS).map(x=>`<tr>${c.f.map(f=>`<td>${f.calc?f.calc(x):f.show?f.show(x[f.k],x):E(x[f.k])}</td>`).join("")}<td style="white-space:nowrap">${can("edit")?`<button class="btn sec sm" onclick="edit(${x.id})">Ubah</button> `:""}${can("del")?`<button class="btn del sm" onclick="del('${k}',${x.id})">Hapus</button>`:""}</td></tr>`).join("");
+ return (can("add")?`<div class="box"><h2>${editing?"Ubah":"Tambah"} ${c.title}</h2><form onsubmit="submitF(event,'${k}')">${form}<div><button class="btn" type="submit">Simpan</button> ${editing?'<button class="btn sec" type="button" onclick="go(tab)">Batal</button>':""}</div></form></div>`:"")+`
+ <div class="box"><h2>Daftar ${c.title} (${list.length})</h2><div class="bar row"><input placeholder="Cari data..." value="${E(q)}" oninput="q=this.value;pg=1;search()" style="max-width:260px"><select onchange="fv=this.value;pg=1;render()" style="max-width:220px"><option value="">Semua (${c.flt})</option>${fopts}</select><button class="btn sec sm" onclick="expCSV('${k}')">Ekspor CSV</button></div><div class="tw"><table><tr>${c.f.map(f=>`<th style="cursor:pointer" onclick="srt('${f.k}')">${f.l}${sk==f.k?(sd>0?" ▲":" ▼"):""}</th>`).join("")}<th>Aksi</th></tr>${rows}</table>${rows?"":'<p class="empty">Tidak ada data yang cocok. Ubah pencarian atau filter, atau tambah data.</p>'}</div><div class="row" style="align-items:center"><button class="btn sec sm" onclick="pg=Math.max(1,pg-1);render()" ${pg<=1?"disabled":""}>Sebelumnya</button><span class="note">Halaman ${pg} dari ${pages}</span><button class="btn sec sm" onclick="pg=Math.min(${pages},pg+1);render()" ${pg>=pages?"disabled":""}>Berikutnya</button></div></div>`}
+
+const PS=8;
+CFG.rooms.flt="jenis";CFG.items.flt="jenis";CFG.pics.flt="instansi";CFG.factors.flt="status";
+const gv=(x,k)=>k=="skor"?skor(x):k=="kep"?kp(x):k=="pj"?nm("pics",x.pj):k=="room"?nm("rooms",x.room):(x[k]??"");
+function sortList(l){if(!sk)return l;return [...l].sort((a,b)=>{const u=gv(a,sk),v=gv(b,sk);return (typeof u=="number"&&typeof v=="number"?u-v:String(u).localeCompare(String(v),"id",{numeric:true}))*sd})}
+function srt(k){sd=sk==k?-sd:1;sk=k;pg=1;render()}
+function dl(n,t,m){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:m}));a.download=n;a.click()}
+function csv(k){const c=CFG[k],z=v=>'"'+String(v??"").replace(/"/g,'""')+'"';return "\ufeff"+[c.f.map(f=>z(f.l)).join(",")].concat(db[k].map(x=>c.f.map(f=>z(gv(x,f.k))).join(","))).join("\r\n")}
+function expCSV(k){logA("Ekspor","CSV "+CFG[k].title);dl("tahura-"+k+".csv",csv(k),"text/csv")}
+function expJSON(){logA("Ekspor","Cadangan JSON");dl("cadangan-sim-tahura.json",JSON.stringify(db,null,1),"application/json")}
+function restore(t){
+ let o;try{o=JSON.parse(t)}catch(e){alert("File bukan JSON yang valid.");return}
+ if(!["rooms","items","pics","factors"].every(k=>Array.isArray(o[k]))){alert("Struktur cadangan tidak sesuai.");return}
+ if(!confirm("Impor akan menimpa semua data saat ini. Lanjutkan?"))return;
+ db=o;db.cfg??=JSON.parse(JSON.stringify(seed.cfg));db.notes??=[];db.plans??=[];db.marks??=[];db.geo??=null;db.log??=[];db.factors.forEach(f=>{f.prob??=3;f.status??="Dilaporkan"});
+ logA("Impor","Cadangan data dipulihkan");go("dash")}
+function impJSON(){if(!can("reset")){alert("Hanya Admin yang boleh mengimpor cadangan.");return}const f=document.getElementById("bf").files[0];if(!f){alert("Pilih file cadangan (.json) dulu.");return}const r=new FileReader();r.onload=()=>restore(r.result);r.readAsText(f)}
+function backupBox(){return `<div class="box"><h2>Cadangan data</h2><div class="row"><button class="btn sec" onclick="expJSON()">Ekspor semua data (JSON)</button>${can("reset")?'<input type="file" id="bf" accept=".json" style="max-width:260px"><button class="btn" onclick="impJSON()">Impor cadangan</button>':""}</div><p class="note">Ekspor per tabel (CSV) ada di tiap tab data. Impor hanya untuk Admin dan menimpa semua data.</p></div>`}
+function reportView(){
+ const rs=rp=="all"?db.rooms:db.rooms.filter(r=>r.id==rp);
+ const body=rs.map(r=>{const p=db.pics.find(x=>x.id==r.pj)||{},its=db.items.filter(i=>i.room==r.id),fs=db.factors.filter(f=>f.room==r.id);
+  return `<div class="box"><h2>${E(r.nama)}</h2><p>${E(r.jenis)} · ${ha(r.luas)}<br>Penanggung jawab: ${E(p.nama||"-")}${p.jabatan?" ("+E(p.jabatan)+", "+E(p.instansi)+")":""}<br><span class="note">Sumber: ${E(r.sumber)} · Kepercayaan data: ${kp(r)}</span></p>
+  <div class="h3">Isi ruang</div>${its.length?`<table><tr><th>Jenis</th><th>Nama</th><th>Keterangan</th></tr>${its.map(i=>`<tr><td>${E(i.jenis)}</td><td>${E(i.nama)}</td><td>${E(i.ket)}</td></tr>`).join("")}</table>`:'<p class="note">Belum ada catatan.</p>'}
+  <div class="h3">Faktor eksternal</div>${fs.length?`<table><tr><th>Jenis</th><th>Deskripsi</th><th>Skor risiko</th><th>Tindak lanjut</th></tr>${fs.map(f=>`<tr><td>${E(f.jenis)}</td><td>${E(f.deskripsi)}</td><td>${skor(f)} (${kat(skor(f))})</td><td>${E(f.status)}</td></tr>`).join("")}</table>`:'<p class="note">Belum ada catatan.</p>'}${rencana(fs)}</div>`}).join("");
+ return `<div class="box noprint"><h2>Laporan per ruang</h2><div class="row"><select onchange="rp=this.value;render()" style="max-width:320px"><option value="all">Semua ruang</option>${db.rooms.map(r=>`<option value="${r.id}" ${r.id==rp?"selected":""}>${E(r.nama)}</option>`).join("")}</select><button class="btn" onclick="printRep()">Cetak / simpan PDF</button></div></div>
+ <div id="rep"><h2>Laporan SIM Tahura Bukit Soeharto</h2><p class="note">Dicetak ${new Date().toLocaleDateString("id-ID")} oleh ${E(user.name)}</p>${body}</div>`}
+function printRep(){logA("Cetak","Laporan: "+(rp=="all"?"semua ruang":nm("rooms",rp)));window.print()}
+const sv=(w,h,i)=>`<div class="tw"><svg viewBox="0 0 ${w} ${h}" style="width:100%;min-width:560px;max-width:${w}px;font:12px sans-serif;fill:var(--tx)"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--mu)"/></marker></defs>${i}</svg></div>`;
+const tx=(x,y,t,a,b)=>`<text x="${x}" y="${y}" text-anchor="${a||"start"}"${b?' font-weight="700"':""}>${E(t)}</text>`;
+const bx=(x,y,w,h,r)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r||4}" style="fill:var(--sf);stroke:var(--ac);stroke-width:1.5"/>`;
+const ar=(a,b,c,d,l)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" style="stroke:var(--mu);stroke-width:1.3" marker-end="url(#ar)"/>${l?tx((a+c)/2,(b+d)/2-4,l,"middle"):""}`;
+function ent(x,y,w,t,ls){return bx(x,y,w,26+ls.length*15)+tx(x+w/2,y+17,t,"middle",1)+`<line x1="${x}" y1="${y+24}" x2="${x+w}" y2="${y+24}" style="stroke:var(--ac)"/>`+ls.map((l,i)=>tx(x+8,y+39+i*15,l)).join("")}
+function erd(){return sv(760,570,
+ ent(20,20,200,"PENANGGUNG_JAWAB",["PK id","nama","jabatan","instansi","kontak","sumber, kepercayaan"])+
+ ent(290,20,200,"RUANG",["PK id","nama","jenis","luas (ha)","FK pj","sumber, kepercayaan"])+
+ ent(560,20,190,"ISI_RUANG",["PK id","FK room","jenis","nama","ket","sumber, kepercayaan"])+
+ ent(290,230,200,"FAKTOR_EKSTERNAL",["PK id","FK room","jenis","deskripsi","dampak","prob (1-5)","status","sumber, kepercayaan"])+
+ ent(20,230,200,"TITIK_PETA",["PK id","FK room","nama","lat, lng","ok (terverifikasi)","ket"])+ent(560,230,190,"CATATAN_LAPANGAN",["PK id","FK room","tgl","jenis","dampak, prob","lat, lng","ket"])+
+ ar(220,80,290,80,"1:N")+ar(490,80,560,80,"1:N")+ar(390,136,390,230,"1:N")+ar(310,136,150,230,"1:N")+ar(470,136,640,230,"1:N")+ent(290,410,200,"RENCANA_AKSI",["PK id","FK factor","FK pj","nama","target","hambatan","milestones (daftar)"])+ar(390,376,390,410,"1:N"))}
+function dfd0(){
+ let i=["Admin","Petugas","Pimpinan"].map((n,k)=>bx(20,30+k*80,110,44)+tx(75,57+k*80,n,"middle")).join("");
+ i+=`<circle cx="400" cy="130" r="75" style="fill:var(--sf);stroke:var(--ac);stroke-width:1.5"/>`+tx(400,125,"0","middle",1)+tx(400,142,"SIM Tahura","middle");
+ i+=ar(130,52,335,105,"kelola, impor")+ar(130,132,325,130,"input, ubah data")+ar(130,212,340,170,"login, minta laporan")+ar(345,175,130,235,"dashboard, laporan");
+ i+=`<line x1="620" y1="100" x2="740" y2="100" style="stroke:var(--ac);stroke-width:1.5"/><line x1="620" y1="160" x2="740" y2="160" style="stroke:var(--ac);stroke-width:1.5"/>`+tx(680,135,"D1 Data SIM","middle")+ar(475,118,620,118,"simpan")+ar(620,145,475,145,"baca");
+ return sv(760,260,i)}
+function dfd1(){
+ let i=bx(20,150,100,50)+tx(70,179,"Pengguna","middle");
+ ["1.0 Autentikasi dan hak akses","2.0 Kelola data master","3.0 Analisis risiko","4.0 Pemetaan lokasi","5.0 Laporan dan cadangan"].forEach((p,k)=>{const y=20+k*72;i+=bx(230,y,200,44,18)+tx(330,y+26,p,"middle")+ar(120,175,230,y+22)});
+ i+=bx(570,20,170,44)+tx(655,47,"D2 Log aktivitas","middle")+bx(570,200,170,44)+tx(655,227,"D1 Data master","middle");
+ i+=ar(430,42,570,42)+ar(430,114,570,55)+ar(430,114,570,208)+ar(430,186,570,215)+ar(430,258,570,230)+ar(430,330,570,238);
+ return sv(760,370,i)}
+const UC=["Login / logout","Lihat dashboard, peta, laporan","Tambah / ubah data","Hapus data","Ekspor CSV / JSON","Impor batas peta dan cadangan","Lihat log aktivitas","Reset data awal","Atur bobot risiko"];
+const MX={Pimpinan:[1,1,0,0,1,0,1,0,0],Petugas:[1,1,1,0,1,0,0,0,0],Admin:[1,1,1,1,1,1,1,1,1]};
+function ucase(){
+ let i="";const ay={Pimpinan:100,Petugas:210,Admin:320};
+ UC.forEach((u,k)=>{const y=30+k*48;i+=`<ellipse cx="480" cy="${y}" rx="150" ry="19" style="fill:var(--sf);stroke:var(--ac);stroke-width:1.3"/>`+tx(480,y+4,u,"middle")});
+ Object.keys(ay).forEach(a=>{i+=bx(20,ay[a]-20,100,40,20)+tx(70,ay[a]+4,a,"middle");MX[a].forEach((v,k)=>{if(v)i+=`<line x1="120" y1="${ay[a]}" x2="330" y2="${30+k*48}" style="stroke:var(--mu);stroke-width:1"/>`})});
+ return sv(660,460,i)}
+function docView(){
+ const mt=`<table><tr><th>Fungsi</th><th>Admin</th><th>Petugas</th><th>Pimpinan</th></tr>${UC.map((u,k)=>`<tr><td>${u}</td>${["Admin","Petugas","Pimpinan"].map(a=>`<td>${MX[a][k]?"Ya":"-"}</td>`).join("")}</tr>`).join("")}</table>`;
+ return `<div class="box"><h2>Tentang sistem</h2>
+ <p><b>Tujuan.</b> Mencatat dan memantau ruang (blok atau area) kawasan konservasi, isi ruang, penanggung jawab, dan faktor eksternal dalam satu sistem, serta membantu menilai risiko faktor eksternal. Studi kasus: Taman Hutan Raya Bukit Soeharto, Kalimantan Timur.</p>
+ <p><b>Ruang lingkup.</b> Pencatatan data master, analisis risiko sederhana (kemungkinan x dampak), pemetaan titik lokasi, catatan lapangan berbasis peta, rencana aksi dan milestone, pengaturan bobot risiko, pelaporan per ruang, penilaian tingkat kepercayaan dan kelengkapan data, ekspor dan cadangan data, serta pencatatan aktivitas pengguna.</p>
+ <p><b>Pengguna.</b> Admin, Petugas, dan Pimpinan dengan hak akses berbeda (lihat matriks di bawah).</p>
+ <p><b>Teknologi.</b> HTML, CSS, dan JavaScript tanpa framework; Leaflet untuk peta; penyimpanan data di localStorage browser.</p>
+ <p><b>Batasan.</b> Prototipe sisi-browser: login hanya simulasi, data tersimpan per perangkat, peta memerlukan internet, luas per blok resmi belum tersedia sehingga diisi manual dari dokumen SK.</p>
+ <p><b>Sumber data.</b> Permen LHK P.76/Menlhk-Setjen/2015; SK Menteri LHK SK.1231/2017; SK Dirjen KSDAE 415/KSDAE/SET/KSA.0/10/2019; Perbup Kutai Kartanegara 34/2024; Pergub Kaltim 35/2018; pemberitaan Antara, Kompas, Bisnis.com, RRI, Tribun Kaltim, Mongabay, dan CNN Indonesia. Tiap data memuat kolom sumber dan tingkat kepercayaan (Resmi, Berita, Asumsi, atau Perlu verifikasi).</p></div>
+ <div class="box"><h2>ERD (diagram relasi entitas)</h2>${erd()}<p class="note">PK = kunci utama, FK = kunci asing. Satu penanggung jawab mengelola banyak ruang; satu ruang memiliki banyak isi ruang, faktor eksternal, titik peta, dan catatan lapangan; satu faktor eksternal dapat memiliki banyak rencana aksi.</p></div>
+ <div class="box"><h2>DFD level 0 (diagram konteks)</h2>${dfd0()}</div>
+ <div class="box"><h2>DFD level 1</h2>${dfd1()}</div>
+ <div class="box"><h2>Use case</h2>${ucase()}</div>
+ <div class="box"><h2>Matriks hak akses</h2><div class="tw">${mt}</div></div>`}
+let addMode=false,nfj="",nfk="",nlayer=null;
+const FJ=["Kebakaran","Pendudukan lahan","Pertambangan ilegal","Infrastruktur","Pembangunan IKN","Sumber air","Lainnya"];
+const nfilt=()=>db.notes.filter(n=>(!nfj||n.jenis==nfj)&&(!nfk||kat(skor(n))==nfk));
+function noteForm(ll,n){n=n||{};const o=(a,v)=>a.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("");return `<div style="min-width:220px"><b>${n.id?"Ubah catatan lapangan":"Catatan lapangan baru"}</b><br><small>${ll.lat.toFixed(5)}, ${ll.lng.toFixed(5)}</small><label>Jenis<select id="nj">${o(FJ,n.jenis)}</select></label><label>Tanggal<input id="nt" type="date" value="${n.tgl||new Date().toISOString().slice(0,10)}"></label><label>Dampak<select id="nd">${o(["Rendah","Sedang","Tinggi"],n.dampak)}</select></label><label>Kemungkinan (1-5)<select id="np">${o([1,2,3,4,5],n.prob)}</select></label><label>Ruang<select id="nr">${db.rooms.map(r=>`<option value="${r.id}" ${r.id==n.room?"selected":""}>${E(r.nama)}</option>`).join("")}</select></label><label>Keterangan<input id="nk" maxlength="160" value="${E(n.ket||"")}"></label>${n.perk?'<label><input type="checkbox" id="nv" style="width:auto"> Lokasi sudah diverifikasi</label>':""}<button class="btn sm" style="margin-top:6px" onclick="saveNote(${ll.lat},${ll.lng}${n.id?","+n.id:""})">Simpan</button></div>`}
+function noteInfo(n){return `<b>${E(n.jenis)}</b> (${kat(skor(n))}, skor ${skor(n)})<br>${E(n.tgl)} · ${E(nm("rooms",n.room))}<br>${E(n.ket||"-")}${n.perk?'<br><b>Lokasi perkiraan</b>: belum diverifikasi (geser titik, lalu pilih Ubah dan centang verifikasi)':""}<br><small>Dicatat oleh ${E(n.oleh)} · ${n.lat.toFixed(5)}, ${n.lng.toFixed(5)}</small>${can("edit")||can("del")?"<br>":""}${can("edit")?`<button class="btn sec sm" onclick="edNote(${n.id})">Ubah</button> `:""}${can("del")?`<button class="btn del sm" onclick="delNote(${n.id})">Hapus</button>`:""}`}
+function drawNotes(){
+ if(!nlayer)return;nlayer.clearLayers();const col={Tinggi:"#b91c1c",Sedang:"#d97706",Rendah:"#15803d"};
+ nfilt().forEach(n=>{
+  const x=L.marker([n.lat,n.lng],{draggable:can("edit"),icon:L.divIcon({className:"",html:`<div class="pin" style="background:${col[kat(skor(n))]};border-radius:4px"></div>`,iconSize:[16,16],iconAnchor:[8,8]})}).addTo(nlayer).bindPopup(noteInfo(n));
+  x.on("dragend",e=>{const q=e.target.getLatLng();n.lat=q.lat;n.lng=q.lng;logA("Ubah","Titik catatan digeser: "+n.jenis);x.setPopupContent(noteInfo(n));refList()})})}
+function saveNote(lat,lng,eid){
+ if(!can(eid?"edit":"add"))return;const g=id=>document.getElementById(id).value;
+ const d={tgl:g("nt"),jenis:g("nj"),dampak:g("nd"),prob:Number(g("np")),room:Number(g("nr")),ket:g("nk")};
+ if(eid){const n=db.notes.find(x=>x.id==eid);if(!n)return;Object.assign(n,d);const v=document.getElementById("nv");if(v&&v.checked)delete n.perk;logA("Ubah","Catatan lapangan: "+n.jenis)}
+ else{db.notes.push(Object.assign({id:Date.now(),lat,lng,oleh:user.name},d));logA("Tambah","Catatan lapangan: "+d.jenis)}
+ if(map)map.closePopup();drawNotes();refList()}
+function edNote(id){const n=db.notes.find(x=>x.id==id);if(!n||!can("edit")||!map)return;map.setView([n.lat,n.lng],Math.max(map.getZoom(),13));L.popup().setLatLng([n.lat,n.lng]).setContent(noteForm(n,n)).openOn(map)}
+function delNote(id){
+ if(!can("del")||!confirm("Hapus catatan ini?"))return;
+ const n=db.notes.find(x=>x.id==id);db.notes=db.notes.filter(x=>x.id!=id);logA("Hapus","Catatan lapangan: "+(n?n.jenis:id));
+ if(map)map.closePopup();drawNotes();refList()}
+function goNote(id){const n=db.notes.find(x=>x.id==id);if(n&&map){map.setView([n.lat,n.lng],15);scrollTo(0,0)}}
+function togMode(){addMode=!addMode;const b=document.getElementById("nbtn");if(b)b.textContent="Mode tambah catatan: "+(addMode?"AKTIF (klik peta)":"mati");if(map)map.getContainer().style.cursor=addMode?"crosshair":""}
+function notesGeo(){return {type:"FeatureCollection",features:db.notes.map(n=>({type:"Feature",properties:{tanggal:n.tgl,jenis:n.jenis,dampak:n.dampak,kemungkinan:n.prob,skor:skor(n),ruang:nm("rooms",n.room),keterangan:n.ket,pencatat:n.oleh,lokasi_perkiraan:!!n.perk},geometry:{type:"Point",coordinates:[n.lng,n.lat]}}))}}
+function expNotes(){logA("Ekspor","Catatan lapangan GeoJSON");dl("catatan-lapangan.geojson",JSON.stringify(notesGeo(),null,1),"application/json")}
+function noteInner(){
+ const l=nfilt().sort((a,b)=>String(b.tgl).localeCompare(String(a.tgl))).slice(0,30);
+ const op=(a,v)=>a.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("");
+ return `<h2>Catatan lapangan (${db.notes.length})</h2><div class="row noprint"><select onchange="nfj=this.value;drawNotes();refList()" style="max-width:220px"><option value="">Semua jenis</option>${op(FJ,nfj)}</select><select onchange="nfk=this.value;drawNotes();refList()" style="max-width:200px"><option value="">Semua risiko</option>${op(["Tinggi","Sedang","Rendah"],nfk)}</select><button class="btn sec sm" onclick="expNotes()">Ekspor GeoJSON</button></div><div class="tw"><table><tr><th>Tanggal</th><th>Jenis</th><th>Ruang</th><th>Risiko</th><th>Keterangan</th><th>Aksi</th></tr>${l.map(n=>`<tr><td>${E(n.tgl)}</td><td>${E(n.jenis)}</td><td>${E(nm("rooms",n.room))}</td><td>${skor(n)} ${tag(kat(skor(n)))}</td><td>${E(n.ket)}${n.perk?' <span class="tag y">lokasi perkiraan</span>':""}</td><td style="white-space:nowrap"><button class="btn sec sm" onclick="goNote(${n.id})">Ke peta</button> ${can("edit")?`<button class="btn sec sm" onclick="edNote(${n.id})">Ubah</button> `:""}${can("del")?`<button class="btn del sm" onclick="delNote(${n.id})">Hapus</button>`:""}</td></tr>`).join("")}</table>${l.length?"":'<p class="empty">Belum ada catatan. Aktifkan mode tambah catatan, lalu klik titik di peta.</p>'}</div>`}
+const noteBox=()=>`<div class="box" id="nbox">${noteInner()}</div>`;
+function refList(){const e=document.getElementById("nbox");if(e)e.innerHTML=noteInner()}
+let pfs="";
+const today=()=>new Date().toISOString().slice(0,10);
+const pprog=p=>p.ms.length?Math.round(p.ms.filter(m=>m.done).length/p.ms.length*100):0;
+const pstat=p=>{const g=pprog(p);return g==100?"Selesai":p.target&&p.target<today()?"Terlambat":g==0?"Belum mulai":"Berjalan"};
+const ptag=s=>`<span class="tag ${{"Selesai":"g","Terlambat":"r","Belum mulai":"y"}[s]||""}">${s}</span>`;
+function syncF(fid){
+ const f=db.factors.find(x=>x.id==fid),ps=db.plans.filter(p=>p.factor==fid);if(!f||!ps.length)return;
+ const ns=ps.every(p=>pprog(p)==100)?"Selesai":ps.some(p=>pprog(p)>0)?"Ditangani":f.status;
+ if(ns!=f.status){f.status=ns;logA("Ubah","Status tindak lanjut faktor "+f.jenis+" menjadi "+ns+" (otomatis dari rencana aksi)")}}
+const rencana=fs=>{const ps=db.plans.filter(p=>fs.some(f=>f.id==p.factor));return ps.length?`<div class="h3">Rencana aksi</div><table><tr><th>Rencana</th><th>Penanggung jawab</th><th>Target</th><th>Progres</th></tr>${ps.map(p=>`<tr><td>${E(p.nama)}</td><td>${E(nm("pics",p.pj))}</td><td>${E(p.target)}</td><td>${pprog(p)}% (${pstat(p)})</td></tr>`).join("")}</table>`:""};
+function mkPlan(d){
+ const ms=String(d.ms).split("\n").map(x=>x.trim()).filter(Boolean).map(n=>({n,done:false,tgl:"",bukti:""}));
+ if(!ms.length){alert("Isi minimal satu milestone.");return false}
+ db.plans.push({id:Date.now(),factor:Number(d.factor),nama:d.nama,pj:Number(d.pj),target:d.target,hambatan:"",ms});
+ logA("Tambah","Rencana aksi: "+d.nama);syncF(Number(d.factor));return true}
+function addPlan(e){e.preventDefault();if(!can("add"))return;if(mkPlan(Object.fromEntries(new FormData(e.target)))){save();render()}}
+function togMs(pid,i){
+ const p=db.plans.find(x=>x.id==pid);if(!p||!can("edit"))return;
+ const m=p.ms[i];m.done=!m.done;m.tgl=m.done?today():"";
+ logA("Ubah","Milestone "+(m.done?"selesai":"dibatalkan")+": "+m.n);syncF(p.factor);save();render()}
+function edMs(pid,i){
+ const p=db.plans.find(x=>x.id==pid);if(!p||!can("edit"))return;
+ const v=prompt("Bukti pencapaian (nama dokumen, tautan, atau keterangan):",p.ms[i].bukti);if(v===null)return;
+ p.ms[i].bukti=v.trim();logA("Ubah","Bukti milestone: "+p.ms[i].n);save();render()}
+function edHb(pid){
+ const p=db.plans.find(x=>x.id==pid);if(!p||!can("edit"))return;
+ const v=prompt("Hambatan yang dihadapi:",p.hambatan);if(v===null)return;
+ p.hambatan=v.trim();logA("Ubah","Hambatan rencana: "+p.nama);save();render()}
+function delPlan(pid){
+ if(!can("del")||!confirm("Hapus rencana aksi ini?"))return;
+ const p=db.plans.find(x=>x.id==pid);db.plans=db.plans.filter(x=>x.id!=pid);logA("Hapus","Rencana aksi: "+(p?p.nama:pid));save();render()}
+function plansCsv(){
+ const z=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+ return "\ufeff"+[["Rencana","Faktor","Penanggung jawab","Target","Progres (%)","Status","Hambatan"].map(z).join(",")].concat(db.plans.map(p=>{const f=db.factors.find(x=>x.id==p.factor)||{};return [p.nama,f.jenis,nm("pics",p.pj),p.target,pprog(p),pstat(p),p.hambatan].map(z).join(",")})).join("\r\n")}
+function expPlans(){logA("Ekspor","CSV Rencana aksi");dl("tahura-rencana-aksi.csv",plansCsv(),"text/csv")}
+let pedit=null;
+const pform=p=>`<form onsubmit="svPlan(event,${p.id})" style="margin-bottom:10px"><label>Nama rencana<input name="nama" value="${E(p.nama)}" required></label><label>Penanggung jawab<select name="pj">${db.pics.map(x=>`<option value="${x.id}" ${x.id==p.pj?"selected":""}>${E(x.nama)}</option>`).join("")}</select></label><label>Target selesai<input name="target" type="date" value="${E(p.target)}" required></label><div><button class="btn" type="submit">Simpan</button> <button class="btn sec" type="button" onclick="pedit=null;render()">Batal</button></div></form>`;
+function chPlan(pid,d){
+ const p=db.plans.find(x=>x.id==pid);if(!p)return false;
+ if(!String(d.nama||"").trim()||!/^\d{4}-\d{2}-\d{2}$/.test(String(d.target||""))){alert("Nama dan target (tanggal) wajib diisi.");return false}
+ p.nama=String(d.nama).trim();p.pj=Number(d.pj);p.target=d.target;logA("Ubah","Rencana aksi: "+p.nama);return true}
+function svPlan(e,pid){e.preventDefault();if(!can("edit"))return;if(chPlan(pid,Object.fromEntries(new FormData(e.target)))){save();pedit=null;render()}}
+function mkMs(pid,t){
+ const p=db.plans.find(x=>x.id==pid),v=String(t||"").trim();if(!p||!v)return false;
+ p.ms.push({n:v,done:false,tgl:"",bukti:""});logA("Tambah","Milestone: "+v);syncF(p.factor);return true}
+function addMs(pid){if(!can("edit"))return;const i=document.getElementById("nm"+pid);if(mkMs(pid,i&&i.value)){save();render()}}
+function rmMs(pid,i){
+ const p=db.plans.find(x=>x.id==pid);if(!p||!p.ms[i])return false;
+ if(p.ms.length<=1){alert("Rencana harus punya minimal satu milestone.");return false}
+ const m=p.ms.splice(i,1)[0];logA("Hapus","Milestone: "+m.n);syncF(p.factor);return true}
+function delMs(pid,i){if(!can("edit")||!confirm("Hapus milestone ini?"))return;if(rmMs(pid,i)){save();render()}}
+function planView(){
+ const fo=db.factors.map(f=>`<option value="${f.id}">${E(f.jenis)}: ${E(String(f.deskripsi).slice(0,50))}</option>`).join("");
+ const po=db.pics.map(p=>`<option value="${p.id}">${E(p.nama)}</option>`).join("");
+ const form=can("add")?`<div class="box"><h2>Tambah rencana aksi</h2><form onsubmit="addPlan(event)"><label>Faktor eksternal<select name="factor" required>${fo}</select></label><label>Nama rencana<input name="nama" required></label><label>Penanggung jawab<select name="pj" required>${po}</select></label><label>Target selesai<input name="target" type="date" required></label><label style="grid-column:1/-1">Milestone (satu per baris, berurutan)<textarea name="ms" rows="4" required></textarea></label><div><button class="btn" type="submit">Simpan</button></div></form></div>`:"";
+ const st=["Belum mulai","Berjalan","Terlambat","Selesai"],l=db.plans.filter(p=>!pfs||pstat(p)==pfs);
+ const cards=l.map(p=>{const f=db.factors.find(x=>x.id==p.factor)||{},g=pprog(p),ed=can("edit");
+  return `<div class="box">${pedit==p.id&&ed?pform(p):""}<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><b>${E(p.nama)}</b><br><span class="note">Faktor: ${E(f.jenis||"-")} ${f.dampak?tag(kat(skor(f))):""} · PJ: ${E(nm("pics",p.pj))} · Target: ${E(p.target||"-")}</span></div><div>${ptag(pstat(p))}</div></div>
+  <div style="background:var(--ac2);border-radius:4px;margin:8px 0"><div style="width:${g}%;background:var(--ac);height:10px;border-radius:4px"></div></div><div class="note">Progres ${g}% (${p.ms.filter(m=>m.done).length}/${p.ms.length} milestone)</div>
+  <div class="tw"><table><tr><th></th><th>Milestone</th><th>Realisasi</th><th>Bukti</th></tr>${p.ms.map((m,i)=>`<tr><td><input type="checkbox" style="width:auto" ${m.done?"checked":""} ${ed?"":"disabled"} onchange="togMs(${p.id},${i})"></td><td>${E(m.n)}</td><td>${E(m.tgl||"-")}</td><td>${E(m.bukti||"-")} ${ed?`<button class="btn sec sm" onclick="edMs(${p.id},${i})">Ubah</button> <button class="btn del sm" onclick="delMs(${p.id},${i})">Hapus</button>`:""}</td></tr>`).join("")}</table></div>${ed?`<div class="row"><input id="nm${p.id}" placeholder="Milestone baru" style="max-width:320px"><button class="btn sec sm" onclick="addMs(${p.id})">Tambah milestone</button></div>`:""}
+  <p class="note">Hambatan: ${E(p.hambatan||"-")} ${ed?`<button class="btn sec sm" onclick="edHb(${p.id})">Ubah</button>`:""} ${ed&&pedit!=p.id?`<button class="btn sec sm" onclick="pedit=${p.id};render()">Ubah rencana</button> `:""}${can("del")?`<button class="btn del sm" onclick="delPlan(${p.id})">Hapus rencana</button>`:""}</p></div>`}).join("");
+ return `${form}<div class="box"><h2>Rencana aksi dan milestone (${db.plans.length})</h2>${bars(st.map(x=>[x,db.plans.filter(p=>pstat(p)==x).length]))}<div class="row"><select onchange="pfs=this.value;render()" style="max-width:220px"><option value="">Semua status</option>${st.map(x=>`<option ${x==pfs?"selected":""}>${x}</option>`).join("")}</select><button class="btn sec sm" onclick="expPlans()">Ekspor CSV</button></div><p class="note">Centang milestone yang sudah tercapai; tanggal realisasi terisi otomatis. Status tindak lanjut faktor eksternal ikut diperbarui: Ditangani bila ada milestone tercapai, Selesai bila semua rencana faktor itu 100%. Dua rencana awal adalah contoh, ubah atau hapus sesuai analisismu.</p></div>${cards||'<div class="box"><p class="empty">Belum ada rencana aksi pada filter ini.</p></div>'}`}
+let tj="";
+const CL={Tinggi:"var(--er)",Sedang:"var(--wr)",Rendah:"var(--ok)"};
+function applyCfg(){Object.assign(DS,db.cfg.bobot);TH.r=db.cfg.r;TH.s=db.cfg.s}
+function mkCfg(d){
+ const br=+d.br,bs=+d.bs,bt=+d.bt,r=+d.r,s=+d.s;
+ if(![br,bs,bt,r,s].every(v=>Number.isInteger(v)&&v>=1&&v<=100)){alert("Semua nilai harus berupa bilangan bulat positif.");return false}
+ if(!(br<=bs&&bs<=bt)){alert("Bobot harus berurutan: rendah, sedang, tinggi (tidak menurun).");return false}
+ if(!(r<s)){alert("Batas kategori rendah harus lebih kecil dari batas kategori sedang.");return false}
+ db.cfg={bobot:{Rendah:br,Sedang:bs,Tinggi:bt},r,s,asumsi:String(d.asumsi||"").trim(),tgl:today(),oleh:user.name};
+ applyCfg();logA("Ubah","Bobot risiko rendah/sedang/tinggi = "+br+"/"+bs+"/"+bt+"; batas kategori "+r+" dan "+s);return true}
+function saveCfg(e){e.preventDefault();if(!can("reset"))return;if(mkCfg(Object.fromEntries(new FormData(e.target)))){save();render()}}
+function resetCfg(){if(!can("reset")||!confirm("Kembalikan bobot dan batas ke nilai bawaan?"))return;db.cfg=JSON.parse(JSON.stringify(seed.cfg));applyCfg();logA("Reset","Pengaturan bobot risiko dikembalikan ke bawaan");save();render()}
+function cfgView(){
+ const c=db.cfg,adm=can("reset"),dis=adm?"":"disabled",D=["Rendah","Sedang","Tinggi"];
+ let m='<table style="text-align:center"><tr><th>Kemungkinan</th>'+D.map(d=>`<th>Dampak ${d.toLowerCase()} (bobot ${c.bobot[d]})</th>`).join("")+"</tr>";
+ for(let p=5;p>=1;p--){m+=`<tr><th>${p}</th>`+D.map(d=>{const sc=p*c.bobot[d],k=kat(sc);return `<td style="background:color-mix(in srgb,${CL[k]} 28%,transparent)">${sc}<br><small>${k}</small></td>`}).join("")+"</tr>"}
+ m+="</table>";
+ const ft=db.factors.map(f=>`<tr><td>${E(f.jenis)}</td><td>${f.prob}</td><td>${E(f.dampak)} (${DS[f.dampak]})</td><td>${skor(f)}</td><td>${tag(kat(skor(f)))}</td></tr>`).join("");
+ const inp=(n,l,v)=>`<label>${l}<input name="${n}" type="number" min="1" max="100" value="${v}" ${dis} required></label>`;
+ return `<div class="box"><h2>Pengaturan bobot risiko</h2><p class="note">Skor risiko = kemungkinan (1-5) x bobot dampak. Bobot dan batas kategori di bawah adalah asumsi yang dapat disesuaikan; skor, grafik, peringatan, dan laporan ikut berubah.</p>
+ <form onsubmit="saveCfg(event)">${inp("br","Bobot dampak rendah",c.bobot.Rendah)}${inp("bs","Bobot dampak sedang",c.bobot.Sedang)}${inp("bt","Bobot dampak tinggi",c.bobot.Tinggi)}${inp("r","Batas kategori rendah (skor sampai)",c.r)}${inp("s","Batas kategori sedang (skor sampai)",c.s)}<label style="grid-column:1/-1">Catatan asumsi<textarea name="asumsi" rows="3" ${dis}>${E(c.asumsi)}</textarea></label>${adm?'<div><button class="btn" type="submit">Simpan pengaturan</button> <button class="btn sec" type="button" onclick="resetCfg()">Kembalikan ke bawaan</button></div>':""}</form>
+ <p class="note">${c.oleh?`Terakhir diubah ${E(c.tgl)} oleh ${E(c.oleh)}.`:"Masih memakai nilai bawaan."}${adm?"":" Hanya Admin yang dapat mengubah pengaturan."}</p></div>
+ <div class="box"><h2>Pratinjau matriks skor</h2><div class="tw">${m}</div></div>
+ <div class="box"><h2>Dampak pada data faktor eksternal saat ini</h2><div class="tw"><table><tr><th>Faktor</th><th>Kemungkinan</th><th>Dampak (bobot)</th><th>Skor</th><th>Kategori</th></tr>${ft}</table></div></div>`}
+function trendBox(){
+ const ns=db.notes.filter(n=>/^\d{4}-\d{2}/.test(n.tgl)&&(!tj||n.jenis==tj));
+ const head=`<div class="box"><h2>Tren catatan lapangan per bulan</h2><div class="row"><select onchange="tj=this.value;render()" style="max-width:220px"><option value="">Semua jenis</option>${FJ.map(x=>`<option ${x==tj?"selected":""}>${x}</option>`).join("")}</select></div>`;
+ if(!ns.length)return head+'<p class="empty">Belum ada catatan lapangan untuk pilihan ini.</p></div>';
+ const mm=ns.map(n=>n.tgl.slice(0,7)).sort(),ls=[];
+ let [yy,mo]=mm[0].split("-").map(Number);const [y2,m2]=mm[mm.length-1].split("-").map(Number);
+ while((yy<y2||(yy==y2&&mo<=m2))&&ls.length<120){ls.push(yy+"-"+String(mo).padStart(2,"0"));mo++;if(mo>12){mo=1;yy++}}
+ const bl=ls.slice(-24);
+ const cnt=bl.map(k=>{const o={Tinggi:0,Sedang:0,Rendah:0};ns.filter(n=>n.tgl.slice(0,7)==k).forEach(n=>o[kat(skor(n))]++);return o});
+ const tot=o=>o.Tinggi+o.Sedang+o.Rendah,mx=Math.max(1,...cnt.map(tot));
+ const W=760,H=250,ml=34,bm=44,tp=12,bw=(W-ml-10)/bl.length,ph=H-bm-tp,st=Math.ceil(mx/5);
+ let g="";
+ for(let t=0;t<=mx;t+=st){const gy=tp+ph-t/mx*ph;g+=`<line x1="${ml}" y1="${gy}" x2="${W-10}" y2="${gy}" style="stroke:var(--ln)"/>`+tx(ml-6,gy+4,String(t),"end")}
+ bl.forEach((k,i)=>{let yb=tp+ph;const o=cnt[i],x=ml+i*bw+bw*.15;
+  ["Rendah","Sedang","Tinggi"].forEach(c=>{const hh=o[c]/mx*ph;if(hh>0){yb-=hh;g+=`<rect x="${x}" y="${yb}" width="${bw*.7}" height="${hh}" style="fill:${CL[c]}"><title>${k}: ${o[c]} catatan risiko ${c.toLowerCase()}</title></rect>`}});
+  if(bl.length<=14||i%2==0)g+=tx(x+bw*.35,H-bm+14,k.slice(5)+"/"+k.slice(2,4),"middle")});
+ g+=["Rendah","Sedang","Tinggi"].map((c,i)=>`<rect x="${ml+i*110}" y="${H-16}" width="10" height="10" style="fill:${CL[c]}"/>`+tx(ml+i*110+14,H-7,"Risiko "+c.toLowerCase())).join("");
+ const best=cnt.reduce((b,o,i)=>tot(o)>b[1]?[bl[i],tot(o)]:b,["",0]);
+ return head+sv(W,H,g)+`<p class="note">Bulan dengan catatan terbanyak: ${best[0]} (${best[1]} catatan). Warna menurut skor risiko tiap catatan. Data awal hanya 5 catatan yang bersumber berita, jadi tren ini belum mewakili frekuensi kejadian sebenarnya.</p></div>`}
+function search(){const s=q;render();const i=document.querySelector(".bar input");i.focus();i.setSelectionRange(s.length,s.length)}
+function submitF(e,k){
+ e.preventDefault();if(!can("add"))return;const d=Object.fromEntries(new FormData(e.target));
+ CFG[k].f.forEach(f=>{if(f.n)d[f.k]=Number(d[f.k]);if(f.t=="number")d[f.k]=d[f.k]===""?null:Number(d[f.k])});
+ if(editing)Object.assign(db[k].find(x=>x.id==editing),d);else{d.id=Date.now();db[k].push(d)}
+ logA(editing?"Ubah":"Tambah",CFG[k].title+": "+(d.nama||d.deskripsi||d.jenis||""));save();editing=null;render()}
+function edit(id){editing=id;render();scrollTo(0,0)}
+function del(k,id){
+ if(!can("del")||!confirm("Hapus data ini?"))return;
+ {const o=db[k].find(x=>x.id==id)||{};logA("Hapus",CFG[k].title+": "+(o.nama||o.deskripsi||o.jenis||id))}
+ db[k]=db[k].filter(x=>x.id!=id);
+ if(k=="rooms"){db.items=db.items.filter(i=>i.room!=id);db.factors=db.factors.filter(f=>f.room!=id);db.marks.forEach(m=>{if(m.room==id)m.room=0})}
+ db.plans=db.plans.filter(p=>db.factors.some(f=>f.id==p.factor));
+ save();render()}
+function reset(){if(confirm("Kembalikan ke data awal? Semua perubahan akan hilang.")){if(!can("reset"))return;db=JSON.parse(JSON.stringify(seed));logA("Reset","Data dikembalikan ke data awal");go("dash")}}
+
+function loginView(){return `<div class="box" style="max-width:420px;margin:30px auto"><h2>Masuk ke sistem</h2><form onsubmit="doLogin(event)" style="grid-template-columns:1fr"><label>Nama pengguna<input name="u" required autocomplete="off"></label><label>Kata sandi<input name="p" type="password" required></label><div><button class="btn" type="submit">Masuk</button></div></form><p class="note">Akun demo (simulasi sisi-browser, bukan keamanan nyata): admin / admin123, petugas / petugas123, pimpinan / pimpinan123.</p><div id="lerr" class="note" style="color:var(--er)"></div></div>`}
+function doLogin(e){e.preventDefault();const d=Object.fromEntries(new FormData(e.target));const a=USERS[d.u];if(!a||a.p!==d.p){document.getElementById("lerr").textContent="Nama pengguna atau kata sandi salah.";return}user={name:d.u,role:a.role};try{sessionStorage.setItem("sim_user",JSON.stringify(user))}catch(x){}logA("Masuk","Login sebagai "+a.role);tab="dash";render()}
+function logout(){logA("Keluar","Logout");user=null;try{sessionStorage.removeItem("sim_user")}catch(x){}render()}
+function logView(){const r=db.log.map(l=>`<tr><td>${E(l.t)}</td><td>${E(l.u)}</td><td>${E(l.a)}</td><td>${E(l.d)}</td></tr>`).join("");return `<div class="box"><h2>Log aktivitas (${db.log.length})</h2><div class="tw"><table><tr><th>Waktu</th><th>Pengguna</th><th>Aksi</th><th>Rincian</th></tr>${r}</table>${r?"":'<p class="empty">Belum ada aktivitas.</p>'}</div><p class="note">Menyimpan 200 aktivitas terakhir.</p></div>`}
+function render(){
+ applyCfg();fillIdent();
+ if(map&&!user){map.remove();map=null}
+ document.getElementById("who").innerHTML=user?`Masuk sebagai <b>${E(user.name)}</b> (${user.role}) <button class="btn sec sm" onclick="logout()">Keluar</button>`:"";
+ if(!user){nav();document.getElementById("app").innerHTML=loginView();return}
+ nav();
+ if(map&&tab!="map"){map.remove();map=null}
+ document.getElementById("app").innerHTML=(tab=="dash"?dash():tab=="map"?mapView():tab=="log"?logView():tab=="rep"?reportView():tab=="doc"?docView():tab=="plan"?planView():tab=="cfg"?cfgView():crud(tab))+(can("reset")?'<p><button class="btn sec sm" onclick="reset()">Reset ke data awal</button></p>':"");
+ if(tab=="map")initMap()}
+render();
+</script>
+</body>
+</html>
